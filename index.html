@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS VARIABLE JS</title>
+    <style>
+        :root{
+            --base:#BADA55;
+            --spacing:10px;
+            --blur:10px;
+        }
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .container
+        {
+            height: 100vh;
+            width: 100%;
+        }
+        .upper-texts{
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+        .upper-texts h2{
+            margin: 0px 20px;
+        }
+        .upper-texts h1{
+            color: var(--base);
+        }
+        .mid-items{
+            width: 100%;
+            height: 30vh;
+            font-size: 1.5rem;
+        }
+        .lower-items{
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-box{
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            margin: 0px 20px;
+        }
+        .color-box{
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .color-input-box{
+            width: 120px;
+            height: 30px;
+            border:none;
+            cursor: pointer;
+
+        }
+        .image-box{
+            width: 50%;
+            height: 50vh;
+            background-color: var(--base);
+            position: relative;
+        }
+        img{
+            position: absolute;
+            top: 40px;
+            left:70px;
+            /* opacity: 1; */
+            /* filter: blur(var(--blur)); */
+            width: 80%;
+            height: 80%;
+            padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upper-texts">
+            <h2>UPDATING CSS VARIABLE BY </h2><h1>JS</h1>
+        </div>
+        <div class="mid-items">
+            <div class="input-box" >
+                <span>SPACING:</span>
+                <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px" class="spacing px">
+                <span>BLUR:</span>
+                <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+            </div>
+            <div class="color-box">
+                <input id="base" type="color" name="base" value="#ffc600" class="color-input-box">
+            </div>
+        </div>
+        <div class="lower-items">
+            <div class="image-box">
+                <img src="./image.jpg" alt="#">
+            </div>
+        </div>
+    </div>
+    <script>
+        const inputs = document.querySelectorAll('.mid-items input');
+    function handleUpdate() {
+        const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    </script>
+</body>
+</html>
